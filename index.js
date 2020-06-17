@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", e => {
     const game = document.querySelector("body > section")
 
     let hasFlippedCard = false
-    let firstCard 
+ 
+    let firstCard = "empty"
+    let secondCard = "empty"
     
     function makeCards(){
       fetch(baseUrl)
@@ -51,10 +53,40 @@ document.addEventListener("DOMContentLoaded", e => {
       
     }
 
+    
+    
+
     game.addEventListener('click', e => {
-     e.target.className === 'card__face'
-        console.log(e.target.className)
+      if(e.target.className === "card__face front-face") {
         e.target.parentNode.classList.toggle('flip')
+        
+        if(firstCard === "empty"){
+          firstCard = e.target
+        } else {
+          secondCard = e.target
+        }
+
+        if(firstCard.parentNode.dataset.title === secondCard.parentNode.dataset.title){
+          console.log("matched")
+          setTimeout(() => {  
+            firstCard.parentNode.innerHTML = " "
+            secondCard.parentNode.innerHTML = " "
+            firstCard = "empty"
+            secondCard = "empty"
+          }, 2000)
+        } else {
+          console.log("unmatched")
+          setTimeout(() => {  
+            firstCard.parentNode.classList.toggle('flip')
+            secondCard.parentNode.classList.toggle('flip')
+            firstCard = "empty"
+            secondCard = "empty"
+          }, 2000)
+          
+        }
+       
+
+      }
     
     })
 
