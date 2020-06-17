@@ -47,14 +47,16 @@ img {
   font-size: 40px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-top: 10px;
-
+  border: 10px;
+  border-radius: 20px 20px 20px 20px;
+  
 }
 
 
 
 
 .front-face {
+  border-top: 10px;
   background: red;
 }
 
