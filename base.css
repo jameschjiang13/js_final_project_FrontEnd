@@ -1,6 +1,6 @@
 
 body {
-  margin-top: 15%;
+  margin-top: 5%;
   height: 100vh;
   display: flex;
   background: white;
@@ -17,7 +17,8 @@ h1 {
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: 50%;
+  flex 1;
 } */
 /* .col-1 { 
   width: 50%;
@@ -96,5 +97,6 @@ img {
 
   width: 75%;
   max-height: 100%;
+  margin: auto;
 
 }
