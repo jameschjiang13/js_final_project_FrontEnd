@@ -1,5 +1,11 @@
 
+
+
 document.addEventListener("DOMContentLoaded", e => {
+
+  const name = prompt("name plz")
+  const welcome = document.querySelector("body > div > h1")
+  welcome.innerHTML =  `Hey ${name}, Welcome to our Memory Game`
 
     //flipping cards 
     const baseUrl = "http://localhost:3000/cards"
@@ -11,6 +17,7 @@ document.addEventListener("DOMContentLoaded", e => {
  
     let firstCard = "empty"
     let secondCard = "empty"
+    let score = 0
     
     function makeCards(){
       fetch(baseUrl)
@@ -32,6 +39,7 @@ document.addEventListener("DOMContentLoaded", e => {
       const memCard = document.createElement('div')
       memCard.className = "memory-card" 
       memCard.dataset.title = card.title
+      memCard.dataset.id = card.id
       const cardFront = document.createElement('div')
       cardFront.classList = "card__face front-face"
       const cardBack = document.createElement('div')
@@ -53,6 +61,14 @@ document.addEventListener("DOMContentLoaded", e => {
       
     }
 
+    function createCard(cardObj){
+      const div = document.createElement("div")
+      const home = document.querySelector("body > div")
+      div.innerHTML = `<img src=${cardObj.image_url}>`
+
+      home.appendChild(div)
+    }
+
     
     
 
@@ -68,11 +84,30 @@ document.addEventListener("DOMContentLoaded", e => {
 
         if(firstCard.parentNode.dataset.title === secondCard.parentNode.dataset.title){
           console.log("matched")
+          const scoreBoard = document.querySelector("body > div > h4")
+          const id = e.target.parentNode.dataset.id
+          fetch(`${baseUrl}/${id}`)
+          .then(response => response.json())
+          .then(cardObj => createCard(cardObj))
+
           setTimeout(() => {  
+            
             firstCard.parentNode.innerHTML = " "
             secondCard.parentNode.innerHTML = " "
+            
+            score = score + 1
+            
+            scoreBoard.innerText = `You have ${score} points`
+
+            
+            if(score === 15) {
+              alert("You win!");
+            }
+
             firstCard = "empty"
             secondCard = "empty"
+
+
           }, 2000)
         } else {
           console.log("unmatched")
@@ -87,8 +122,12 @@ document.addEventListener("DOMContentLoaded", e => {
        
 
       }
-    
+
+      
+
     })
+
+    
 
 
   //    const flipCard = card => {
