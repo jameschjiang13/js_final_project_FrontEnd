@@ -45,8 +45,8 @@ h1 {
 
 .memory-card {
     
-  width: calc(25% - 10px);
-  height: calc(20.333% - 10px);
+  width: calc(20% - 10px);
+  height: calc(15.333% - 10px);
   margin: 5px;
   padding: 20px;
   transition: transform 1s;
@@ -66,7 +66,7 @@ h1 {
   
   
   height: 100%;
-  line-height: 260px;
+  /* line-height: 260px; */
   color: white;
   text-align: center;
   font-weight: bold;
@@ -95,4 +95,6 @@ h1 {
 img {
 
   width: 75%;
+  max-height: 100%;
+
 }
