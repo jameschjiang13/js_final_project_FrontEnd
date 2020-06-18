@@ -3,9 +3,9 @@
 
 document.addEventListener("DOMContentLoaded", e => {
 
-  const name = prompt("What's your name?")
-  const welcome = document.querySelector("body > div > h1")
-  welcome.innerHTML =  `Hey ${name}, Welcome to our Memory Game`
+  // const name = prompt("What's your name?")
+  // const welcome = document.querySelector("body > div > h1")
+  // welcome.innerHTML =  `Hey ${name}, Welcome to our Memory Game`
 
     //flipping cards 
     const baseUrl = "http://localhost:3000/cards"
@@ -71,7 +71,57 @@ document.addEventListener("DOMContentLoaded", e => {
 
 
     game.addEventListener('click', e => {
-      console.log(e.target.parentNode.className)
+      // if clicked on the image
+      if(e.target.parentNode.className === "card__face front-face") {
+        e.target.parentNode.parentNode.classList.toggle('flip')
+        
+        if(firstCard === "empty"){
+          firstCard = e.target.parentNode
+        } else {
+          secondCard = e.target.parentNode
+        }
+
+        if(firstCard.parentNode.dataset.title === secondCard.parentNode.dataset.title){
+          console.log("matched")
+          const scoreBoard = document.querySelector("body > div > h4")
+          const id = e.target.parentNode.parentNode.dataset.id
+          fetch(`${baseUrl}/${id}`)
+          .then(response => response.json())
+          .then(cardObj => createCard(cardObj))
+
+          setTimeout(() => {  
+            
+            firstCard.parentNode.innerHTML = " "
+            secondCard.parentNode.innerHTML = " "
+            
+            score = score + 1
+            
+            scoreBoard.innerText = `You have ${score} points`
+
+            
+            if(score === 6) {
+              alert("You win!");
+            }
+
+            firstCard = "empty"
+            secondCard = "empty"
+
+
+          }, 2000)
+        } else {
+          console.log("unmatched")
+          setTimeout(() => {  
+            firstCard.parentNode.classList.toggle('flip')
+            secondCard.parentNode.classList.toggle('flip')
+            firstCard = "empty"
+            secondCard = "empty"
+          }, 2000)
+          
+        }
+       
+
+      }
+      
 
       if(e.target.className === "card__face front-face") {
         e.target.parentNode.classList.toggle('flip')
