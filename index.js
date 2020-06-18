@@ -65,11 +65,16 @@ document.addEventListener("DOMContentLoaded", e => {
       const div = document.createElement("div")
       div.className = "your-gif"
       const home = document.querySelector("body > div")
-      div.innerHTML = `
-      <h2>Nice Work!</h2>
-      <h3>Your Scored Gifs</h3>
+      const h2 = document.createElement("h2")
+      h2.innerHTML =`Nice Work!`
+      const h3 = document.createElement("h3")
+      h3.innerHTML =`Your Scored Gifs`
+      div.appendChild(h2)
+      div.appendChild(h3)
+      div.innerHTML += `
+      
       <img class="your-img" src=${cardObj.image_url}>`
-
+     
       home.appendChild(div)
     }
 
