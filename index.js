@@ -3,7 +3,7 @@
 
 document.addEventListener("DOMContentLoaded", e => {
 
-  const name = prompt("name plz")
+  const name = prompt("What's your name?")
   const welcome = document.querySelector("body > div > h1")
   welcome.innerHTML =  `Hey ${name}, Welcome to our Memory Game`
 
@@ -69,10 +69,10 @@ document.addEventListener("DOMContentLoaded", e => {
       home.appendChild(div)
     }
 
-    
-    
 
     game.addEventListener('click', e => {
+      console.log(e.target.parentNode.className)
+
       if(e.target.className === "card__face front-face") {
         e.target.parentNode.classList.toggle('flip')
         
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", e => {
             scoreBoard.innerText = `You have ${score} points`
 
             
-            if(score === 15) {
+            if(score === 6) {
               alert("You win!");
             }
 
