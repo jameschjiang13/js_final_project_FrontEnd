@@ -4,8 +4,8 @@
 document.addEventListener("DOMContentLoaded", e => {
 
   const name = prompt("What's your name?")
-  const welcome = document.querySelector("body > div > h1")
-  welcome.innerHTML =  `Hey ${name}, Welcome to our Memory Game`
+  const welcome = document.querySelector("body > div > h2")
+  welcome.innerHTML =  `Hey ${name}, Welcome to`
 
     //flipping cards 
     const baseUrl = "http://localhost:3000/cards"
@@ -63,8 +63,12 @@ document.addEventListener("DOMContentLoaded", e => {
 
     function createCard(cardObj){
       const div = document.createElement("div")
+      div.className = "your-gif"
       const home = document.querySelector("body > div")
-      div.innerHTML = `<img src=${cardObj.image_url}>`
+      div.innerHTML = `
+      <h2>Nice Work!</h2>
+      <h3>Your Scored Gifs</h3>
+      <img class="your-img" src=${cardObj.image_url}>`
 
       home.appendChild(div)
     }
